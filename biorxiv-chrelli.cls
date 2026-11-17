@@ -4,8 +4,12 @@
 %% Copyright (c) 2026, adaptation prepared for this Overleaf project.
 %% Compile with XeLaTeX (or LuaLaTeX).
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{biorxiv-chrelli}[2026/11/17 v1.3 bioRxiv Chrelli-style two-column preprint]
+\ProvidesClass{biorxiv-chrelli}[2026/11/17 v1.4 simplified bioRxiv Chrelli-style preprint]
 \LoadClass[10pt,a4paper,twocolumn]{article}
+
+% -----------------------------------------------------------------------------
+% Dependencies
+% -----------------------------------------------------------------------------
 \RequirePackage{iftex}
 \ifPDFTeX
   \ClassError{biorxiv-chrelli}{Use XeLaTeX or LuaLaTeX}{Choose XeLaTeX in Overleaf's Menu > Compiler.}
@@ -23,21 +27,13 @@
 \RequirePackage{amsmath}
 \RequirePackage{booktabs}
 \RequirePackage{array}
-\RequirePackage{etoolbox}
 \RequirePackage{hyperref}
-% Default citation mode: inline numeric references in square brackets,
-% e.g. [1,2]. The optional commands below change only in-text citations;
-% select the corresponding BibTeX style in the manuscript as documented
-% in README.md.
 \RequirePackage[numbers,square,sort&compress]{natbib}
-\newcommand{\UseAPAReferences}{%
-  \setcitestyle{authoryear,round,citesep={;},aysep={,},yysep={,}}%
-}
-\newcommand{\UseNatureReferences}{%
-  \setcitestyle{super,sort&compress,open={},close={}}%
-}
 \RequirePackage{ragged2e}
 
+% -----------------------------------------------------------------------------
+% Layout
+% -----------------------------------------------------------------------------
 % Exact column proportions stated by the original project's author:
 % 89 mm + 5.9 mm + 89 mm = 183.9 mm on A4 (210 x 297 mm).
 \geometry{a4paper,left=13.05mm,right=13.05mm,top=18mm,bottom=17mm,
@@ -50,6 +46,9 @@
 \frenchspacing
 \raggedbottom
 
+% -----------------------------------------------------------------------------
+% Typography and colors
+% -----------------------------------------------------------------------------
 % STIX Two Text / Math are TeX Live fonts and available on Overleaf.
 \setmainfont{STIXTwoText}[
   Extension=.otf,
@@ -84,10 +83,7 @@
     Scale=MatchLowercase]
   \ClassWarningNoLine{biorxiv-chrelli}{TeX Gyre Heros OTF unavailable; using Latin Modern Sans instead}%
 }
-\newfontfamily\biorxivlogo{STIXTwoText}[
-  Extension=.otf,UprightFont=*-Regular,ItalicFont=*-Italic]
 \definecolor{biorxivred}{HTML}{C50000}
-\definecolor{biorxivdeepred}{HTML}{9B1724}
 \definecolor{biorxivblue}{HTML}{5D9DD0}
 \hypersetup{colorlinks=true,linkcolor=biorxivred,citecolor=biorxivred,
             urlcolor=biorxivred,pdfcreator={XeLaTeX / Overleaf},
@@ -95,10 +91,11 @@
 
 % Compact, justified main text.
 \AtBeginDocument{\fontsize{9.4pt}{10.75pt}\selectfont\justifying}
-\newcommand{\BodyText}{\fontsize{9.4pt}{10.75pt}\selectfont}
 \newcommand{\MethodsText}{\fontsize{8.65pt}{9.8pt}\selectfont}
-\newcommand{\FigureLegendText}{\fontsize{7.8pt}{9.0pt}\selectfont}
 
+% -----------------------------------------------------------------------------
+% Headings
+% -----------------------------------------------------------------------------
 % All section heads are unnumbered and red, as in the Word style gallery.
 \setcounter{secnumdepth}{0}
 \titleformat{\section}[hang]
@@ -114,13 +111,11 @@
   {}{0pt}{}[.\ ]
 \titlespacing*{\subsubsection}{0pt}{5pt}{3pt}
 
-\newcommand{\ResultsLead}[1]{\par\medskip\noindent
-  {\sffamily\bfseries\color{biorxivred}\fontsize{9pt}{10pt}\selectfont #1}\par\smallskip}
-\newcommand{\MethodsLead}[1]{\par\smallskip\noindent
-  {\sffamily\bfseries\color{biorxivred}\fontsize{8.4pt}{9.4pt}\selectfont #1}\par\smallskip}
-
+% -----------------------------------------------------------------------------
+% Captions and floats
+% -----------------------------------------------------------------------------
 % Legend styles: red title / black text.
-\DeclareCaptionFont{biorxivlegend}{\FigureLegendText}
+\DeclareCaptionFont{biorxivlegend}{\fontsize{7.8pt}{9.0pt}\selectfont}
 \captionsetup[figure]{font=biorxivlegend,
     labelfont={bf,color=biorxivred},textfont=normalfont,
     labelsep=colon,justification=raggedright,singlelinecheck=false,
@@ -139,7 +134,9 @@
 \setcounter{topnumber}{4}
 \setcounter{dbltopnumber}{3}
 
-% Front matter interfaces (edit definitions in main.tex).
+% -----------------------------------------------------------------------------
+% Manuscript metadata
+% -----------------------------------------------------------------------------
 \makeatletter
 \def\@biorxivtitle{Title of the manuscript}
 \def\@biorxivauthors{First A. Author\textsuperscript{1}}
@@ -154,6 +151,10 @@
 \newcommand{\RunningTitle}[1]{\gdef\@biorxivrunning{#1}}
 \newcommand{\FooterCitation}[1]{\gdef\@biorxivfooter{#1}}
 \newcommand{\affilmarker}[1]{{\color{biorxivred}\textsuperscript{#1}}}
+
+% -----------------------------------------------------------------------------
+% Logo
+% -----------------------------------------------------------------------------
 % The wordmark PDF comes from the bundled, horizontally cropped SVG.
 % Set the size by changing the value below (or with \SetBioRxivLogoWidth).
 \newlength{\biorxivwordmarkwidth}
@@ -169,7 +170,10 @@
 \newif\ifbiorxivlogovisible
 \biorxivlogovisiblefalse
 \newcommand{\ShowBioRxivLogo}{\biorxivlogovisibletrue}
-\newcommand{\HideBioRxivLogo}{\biorxivlogovisiblefalse}
+
+% -----------------------------------------------------------------------------
+% Title block
+% -----------------------------------------------------------------------------
 \newcommand{\@biorxivtitleblock}{%
   \ifbiorxivlogovisible
     % Match the visible logo's top with the title's top in logo-free mode.
@@ -197,6 +201,9 @@
   \thispagestyle{biorxivfirst}%
 }
 
+% -----------------------------------------------------------------------------
+% Headers and footers
+% -----------------------------------------------------------------------------
 % Running title at the top of pages 2+, compact citation and page at foot.
 \fancypagestyle{biorxiv}{%
   \fancyhf{}
@@ -215,6 +222,19 @@
 }
 \pagestyle{biorxiv}
 \makeatother
+
+% -----------------------------------------------------------------------------
+% Citations and bibliography
+% -----------------------------------------------------------------------------
+% Default citation mode: inline numeric references in square brackets, e.g.
+% [1,2]. These commands change in-text citations only; select the matching
+% BibTeX style in the manuscript as documented in README.md.
+\newcommand{\UseAPAReferences}{%
+  \setcitestyle{authoryear,round,citesep={;},aysep={,},yysep={,}}%
+}
+\newcommand{\UseNatureReferences}{%
+  \setcitestyle{super,sort&compress,open={},close={}}%
+}
 
 % Narrow references, with numbered hanging labels.
 \renewcommand{\bibfont}{\fontsize{7.9pt}{9.1pt}\selectfont}

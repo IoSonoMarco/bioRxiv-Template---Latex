@@ -29,48 +29,34 @@ An **Overleaf-ready, two-column LaTeX manuscript template** inspired by the typo
 
 ## Features
 
-- Two-column A4 layout inspired by the bioRxiv Word design, with red headings and compact typography.
-- STIX Two Text/Math and a Helvetica-like sans-serif font for display elements.
-- Optional bioRxiv wordmark, with adjustable width.
-- Example one-column (89 mm), 1.5-column (133.125 mm), and full-width (183.9 mm) figures.
-- Numeric, APA-like author–year, or Nature-like superscript citations through `natbib`.
-- Custom commands for manuscript metadata, section lead-ins, and methods text.
+- Overleaf-ready manuscript structure with a compact two-column A4 layout.
+- bioRxiv-inspired STIX typography, red headings, and figure-caption styling.
+- Standard LaTeX sections, subsections, and run-in subsubsections.
+- Simple commands for manuscript metadata and correspondence details.
+- Optional bioRxiv wordmark with an adjustable width.
+- Numeric, APA-like author–year, and Nature-like superscript citations through `natbib`.
+- One-column (89 mm), 1.5-column (133.125 mm), and full-width (183.9 mm) figures.
+- Template-specific smaller typography for Materials and Methods.
 
-## Command reference
+## Template-specific commands
 
-The commands below are a **quick reference**. Commands labeled **Template** are defined by `biorxiv-chrelli.cls`; commands labeled **LaTeX** are standard LaTeX commands or provided by the included packages.
-
-| Command | Type | What it does |
+| Category | Command | Description |
 |:--|:--|:--|
-| `\documentclass{biorxiv-chrelli}` | LaTeX | Loads the custom manuscript class. |
-| `\ShowBioRxivLogo` | Template | Shows the bioRxiv wordmark above the title. |
-| `\HideBioRxivLogo` | Template | Hides the wordmark and its reserved spacing. |
-| `\SetBioRxivLogoWidth{31.7mm}` | Template | Changes the wordmark width. |
-| `\PaperTitle{...}` | Template | Sets the manuscript title. |
-| `\PaperAuthors{...}` | Template | Sets the author list. |
-| `\PaperAffiliations{...}` | Template | Sets institutions and correspondence details. |
-| `\affilmarker{1}` | Template | Inserts a red superscript affiliation marker. |
-| `\PaperAbstract{...}` | Template | Sets the abstract in the title block. |
-| `\RunningTitle{...}` | Template | Sets the running header on subsequent pages. |
-| `\FooterCitation{...}` | Template | Sets the footer citation text. |
-| `\UseAPAReferences` | Template | Enables author–year citations; pair with `apalike`. |
-| `\UseNatureReferences` | Template | Enables superscript numeric citations; pair with `unsrtnat`. |
-| `\maketitle` | LaTeX | Prints the title, authors, affiliations, and abstract. |
-| `\section{...}` | LaTeX | Starts a red, unnumbered section. |
-| `\subsection{...}` | LaTeX | Starts a smaller red, unnumbered subsection. |
-| `\subsubsection{...}` | LaTeX | Starts a red, run-in subsubsection. |
-| `\ResultsLead{...}` | Template | Adds a red, bold lead-in heading in the main text. |
-| `\MethodsLead{...}` | Template | Adds a smaller red lead-in heading for methods. |
-| `\BodyText` | Template | Applies the default manuscript body text size. |
-| `\MethodsText` | Template | Applies the smaller methods text size; use within a group. |
-| `\FigureLegendText` | Template | Applies the figure-caption text size when needed manually. |
-| `\legendtitle{...}` | Template | Formats the red, bold opening phrase of a figure caption. |
-| `\begin{figure} ... \end{figure}` | LaTeX | Creates a one-column figure. |
-| `\begin{figure*} ... \end{figure*}` | LaTeX | Creates a figure spanning both columns (also used for the 1.5-column example). |
-| `\caption{...}` / `\label{...}` | LaTeX | Adds a caption and cross-reference label. |
-| `\citep{key}` / `\citet{key}` | `natbib` | Inserts parenthetical or textual citations, according to the selected style. |
-| `\bibliographystyle{...}` | LaTeX/BibTeX | Chooses the bibliography formatting style. |
-| `\bibliography{references}` | LaTeX/BibTeX | Prints references from `references.bib`. |
+| Logo | `\ShowBioRxivLogo` | Shows the bioRxiv wordmark above the title. |
+| Logo | `\SetBioRxivLogoWidth{...}` | Changes the wordmark width from its 31.7 mm default. |
+| Metadata | `\PaperTitle{...}` | Sets the manuscript title. |
+| Metadata | `\PaperAuthors{...}` | Sets the author list. |
+| Metadata | `\PaperAffiliations{...}` | Sets affiliations and correspondence details. |
+| Metadata | `\affilmarker{...}` | Inserts a styled affiliation or correspondence marker. |
+| Metadata | `\PaperAbstract{...}` | Sets the abstract in the title block. |
+| Metadata | `\RunningTitle{...}` | Sets the running header from page 2 onward. |
+| Metadata | `\FooterCitation{...}` | Sets the citation text in the page footer. |
+| Citations | `\UseAPAReferences` | Selects APA-like author–year citations. |
+| Citations | `\UseNatureReferences` | Selects Nature-like superscript citations. |
+| Figures | `\legendtitle{...}` | Styles the opening title of a figure or table caption. |
+| Typography | `\MethodsText` | Applies the template's smaller methods typography. |
+
+Everything else uses standard LaTeX commands and environments. Use `\section`, `\subsection`, and `\subsubsection` for manuscript headings; standard `figure`, `table`, and equation environments for scientific content; and `\caption`, `\label`, and `\ref` for captions and cross-references. Citation commands such as `\citep` and `\citet` come from the included `natbib` package, and bibliographies use the standard BibTeX workflow. The class applies the appropriate typography and layout automatically.
 
 ### Minimal manuscript structure
 
@@ -96,12 +82,12 @@ The commands below are a **quick reference**. Commands labeled **Template** are 
 Your introduction goes here.
 
 \section{Results}
-\ResultsLead{A short heading highlighting a finding}
+\subsection{A finding}
 Your results go here.
 
 \section{Materials and Methods}
 {\MethodsText
-\MethodsLead{Experimental procedure}
+\subsection{Experimental procedure}
 Describe your methods here.
 }
 
@@ -119,9 +105,10 @@ The class **hides the wordmark by default**. The provided `main.tex` shows it by
 
 ```latex
 \ShowBioRxivLogo              % Show the logo
-% \HideBioRxivLogo            % Hide it (or simply omit \ShowBioRxivLogo)
 \SetBioRxivLogoWidth{31.7mm}  % Optional width adjustment
 ```
+
+To hide the logo and remove its reserved spacing, omit or comment out `\ShowBioRxivLogo`.
 
 `biorxiv-logo.pdf` is the vector asset LaTeX uses; `biorxiv-logo.svg` is the editable vector source. The wordmark is horizontally cropped to align with the manuscript text.
 
@@ -167,6 +154,18 @@ For example, a one-column figure can be written as:
 ```
 
 Figures using `figure*` are double-column floats and may appear at the top of a following page rather than at their exact position in the source. Refer to `main.tex` for working examples of all three widths.
+
+## Methods typography
+
+Use `\MethodsText` inside a group so the smaller methods typography does not affect later sections. Standard headings continue to receive their class-defined styles inside the group.
+
+```latex
+\section{Materials and Methods}
+{\MethodsText
+\subsection{Experimental procedure}
+Describe the procedure here.
+}
+```
 
 ## Project files
 

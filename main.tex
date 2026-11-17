@@ -5,7 +5,7 @@
 % No separate upload or SVG conversion is required in Overleaf.
 \documentclass{biorxiv-chrelli}
 
-\ShowBioRxivLogo % Comment out to hide logo AND remove its spacing
+\ShowBioRxivLogo % Optional: comment out to hide the logo and its spacing.
 
 \usepackage{lipsum} % Only for demonstration; remove for your manuscript.
 
@@ -61,7 +61,9 @@
 
 
 \section{Results}
-\ResultsLead{A short red lead-in introduces the experimental result}
+\subsection{A standard subsection introduces the experimental result}
+Figures~\ref{fig:onehalf} and~\ref{fig:one} demonstrate the two smaller
+supported figure widths.
 \lipsum[5]
 \lipsum[6][1-6]
 
@@ -81,7 +83,8 @@
 
 \section{Discussion}
 \lipsum[9]\lipsum[10]
-\ResultsLead{What a massive breakthrough for the field}
+\subsection{What a massive breakthrough for the field}
+The full-width layout is illustrated in Figure~\ref{fig:fullwidth}.
 \lipsum[11]
 
 % A full-width figure spans the full 183.9 mm text area (both columns).
@@ -101,18 +104,21 @@
 \lipsum[15]
 
 \section{Materials and Methods}
+% Group MethodsText so the smaller methods typography ends with this section.
 {\MethodsText
-\MethodsLead{First methods subheading (no space before)}
+\subsection{First methods subheading}
 \lipsum[12]
-\MethodsLead{Very tricky method (4 pt space before)}
+\subsection{Very tricky method}
 \lipsum[13-14]
 \lipsum[16-23]
 }
 
 \section{References and citations}
 A citation in the same compact authorial text style \citep{example2026}
-can be managed with your BibTeX database. Equations use STIX Two Math:
+can be managed with your BibTeX database. Equation~\ref{eq:logistic}
+demonstrates STIX Two Math:
 \begin{equation}
+  \label{eq:logistic}
   P(Y\!=\!1\mid X)=\frac{e^{\beta_0+\beta_1X}}{1+e^{\beta_0+\beta_1X}}.
 \end{equation}
 
