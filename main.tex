@@ -1,0 +1,135 @@
+% !TEX program = xelatex
+% Upload the entire ZIP to Overleaf. Set the compiler to XeLaTeX.
+% Template faithful to the typography of chrelli/bioRxiv-word-template.
+% The bundled vector bioRxiv logo is inserted by biorxiv-chrelli.cls.
+% No separate upload or SVG conversion is required in Overleaf.
+\documentclass{biorxiv-chrelli}
+
+\ShowBioRxivLogo % Comment out to hide logo AND remove its spacing
+
+\usepackage{lipsum} % Only for demonstration; remove for your manuscript.
+
+% --- EDIT THE PAPER METADATA HERE ---
+\PaperTitle{Challenging experiments reveal a very surprising
+\\and interesting biological discovery}
+\PaperAuthors{First A. Lastname\affilmarker{1}, Second B. Lastname\affilmarker{2,3}
+  and First B. Lastname\affilmarker{1,4,*}}
+\PaperAffiliations{%
+  \affilmarker{1}Institute of Biology, University of Something, 10115 Berlin, Germany\\
+  \affilmarker{2}Center for Biological Sciences, Another University, 10115 Berlin, Germany\\
+  \affilmarker{3}Current address: Department of Animal Biology, University Somewhere Else, NY, USA\\
+  \affilmarker{4}Biology Cluster of Whatever, Some Research University, 2200 Copenhagen N, Denmark\\
+  \affilmarker{*}Correspondence should be addressed to F.B.L. (first.lastname@example.edu)
+}
+\PaperAbstract{%
+  Biological research often benefits from clear, compact manuscript design.
+  This example reproduces the principal styles of the Chrelli bioRxiv Word
+  template: a Helvetica-like title and abstract, STIX Two body and mathematics,
+  red headings, narrow two-column text, and carefully sized figure legends.
+  Replace this abstract with your own scientific summary. A well-written
+  abstract states the question, gives the main experimental approach, reports
+  the principal observations and concludes with their wider significance.
+  This is demonstration text rather than a statement of scientific findings.
+  The class is an independent LaTeX adaptation intended for an editable
+  Overleaf manuscript, not a publishing service or an official bioRxiv style.
+  \lipsum[1] \lipsum[2][1-5]
+}
+\RunningTitle{Running title}
+\FooterCitation{Lastname et al. 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+\lipsum[1-3]
+\lipsum[4][1-6]
+
+% Full-width or 1.5-column figures use figure*.
+% In LaTeX these are top-of-page floats; exact Word-style image anchoring
+% is intentionally replaced by reliable LaTeX float placement.
+\begin{figure*}[t]
+  \centering
+  \begin{minipage}{133.125mm}
+    \centering
+    \colorbox{biorxivblue}{\parbox[c][26mm][c]{\dimexpr\linewidth-2\fboxsep\relax}{\strut}}
+    \caption{\legendtitle{Example of a one-and-one-half-column figure.}
+      This 133.125\,mm-wide environment uses the same figure width recommended
+      by the source Word template. It may sit at the top of a following page.}
+    \label{fig:onehalf}
+  \end{minipage}
+\end{figure*}
+
+
+\section{Results}
+\ResultsLead{A short red lead-in introduces the experimental result}
+\lipsum[5]
+\lipsum[6][1-6]
+
+\begin{figure}[t]
+  \centering
+  % Original Word example uses a 89 mm one-column figure.
+  \colorbox{biorxivblue}{\parbox[c][43mm][c]{\dimexpr\columnwidth-2\fboxsep\relax}{\strut}}
+  \caption{\legendtitle{Example of a one-column figure.}
+  The blue rectangle stands in for an experimental image or graph.
+  The figure occupies exactly one 89\,mm text column. Replace this
+  placeholder with \texttt{\textbackslash includegraphics[width=\textbackslash columnwidth]\{myfigure\}}.}
+  \label{fig:one}
+\end{figure}
+
+\subsection{Another example of a subheading}
+\lipsum[7-8]
+
+\section{Discussion}
+\lipsum[9]\lipsum[10]
+\ResultsLead{What a massive breakthrough for the field}
+\lipsum[11]
+
+% A full-width figure spans the full 183.9 mm text area (both columns).
+% Like the 1.5-column example, figure* is a top-of-page float. In this
+% three-page mockup, it demonstrates the third image size on page 3.
+\begin{figure*}[t]
+  \centering
+  \colorbox{biorxivblue}{\parbox[c][39mm][c]{\dimexpr\textwidth-2\fboxsep\relax}{\strut}}
+  \caption{\legendtitle{Example of a full-width, two-column figure.}
+    This 183.9\,mm-wide placeholder spans the entire text area and illustrates
+    the largest figure size in the template. Replace it with
+    \texttt{\textbackslash includegraphics[width=\textbackslash textwidth]\{myfigure\}}.}
+  \label{fig:fullwidth}
+\end{figure*}
+
+% Additional sample paragraphs help demonstrate the three-page layout.
+\lipsum[15]
+
+\section{Materials and Methods}
+{\MethodsText
+\MethodsLead{First methods subheading (no space before)}
+\lipsum[12]
+\MethodsLead{Very tricky method (4 pt space before)}
+\lipsum[13-14]
+\lipsum[16-23]
+}
+
+\section{References and citations}
+A citation in the same compact authorial text style \citep{example2026}
+can be managed with your BibTeX database. Equations use STIX Two Math:
+\begin{equation}
+  P(Y\!=\!1\mid X)=\frac{e^{\beta_0+\beta_1X}}{1+e^{\beta_0+\beta_1X}}.
+\end{equation}
+
+% In your real paper, remove the example section above and leave just
+% \bibliography{references} so the bibliography begins with "References".
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\section{Acknowledgements}
+We thank our colleagues and collaborators for constructive discussion.
+Replace this text with your acknowledgements and funding information.
+
+\section{Author contributions}
+Conceptualization: F.A.L., S.B.L.; Investigation: F.A.L.; Methodology: S.B.L.;
+Writing--original draft: F.A.L.; Writing--review and editing: all authors.
+
+\section{Competing interest statement}
+The authors declare no competing interests.
+
+\end{document}
